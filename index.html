@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>Text To Speech</title>
+</head>
+<body class="bg-slate-600 custom">
+  <div class="grid grid-cols-1 gap-4 lg:gap-8 p-6">
+    <div class="h-auto rounded-lg bg-gray-950 hidden md:block shadow-2xl" ><video class="rounded-md" src="assets/Banner.webm" autoplay loop muted></video></div>
+    <div class="h-auto rounded-lg bg-gray-950 md:hidden shadow-2xl"><video class="rounded-md" src="assets/wave.mp4" autoplay loop muted></video></div>
+  </div>
+
+  <div class="w-2/3 mx-auto bg-center">
+  <!-- Text that You Will Write -->
+    <textarea class="w-full rounded-lg border-gray-200 p-3 text-sm shadow-2xl border-none align-top focus:ring-0 sm:text-sm dark:bg-gray-800 dark:text-white"
+    placeholder="Message"
+    rows="8"
+    id="myText"></textarea>
+
+  <!-- Speak Button -->
+  <div class="mt-4">
+    <button type="submit"
+    onclick="textToVoice()"
+    class="inline-block w-full rounded bg-indigo-600 px-5 py-2 font-medium text-white transition hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring active:bg-indigo-500 sm:w-auto cursor-custom"
+    > Voice Generator</button>
+  </div>
+</div>
+
+<!-- js -->
+<script>
+  const inputText = document.querySelector('#myText')
+
+function textToVoice(){
+  const msg = new SpeechSynthesisUtterance();
+  msg.text = inputText.value;
+
+  const voices = window.speechSynthesis.getVoices();
+  msg.voice = voices[0];
+  window.speechSynthesis.speak(msg)
+}
+</script>
+</body>
+</html>
